@@ -17,6 +17,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Scaffold(
       bottomNavigationBar: NavigationBar(),
       backgroundColor: Colors.white,
@@ -70,13 +71,13 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               ),
             ],
           ),
-          isDone ? _showEnd() : _showSlider(),
+          isDone ? _showEnd(size) : _showSlider(size),
         ],
       ),
     );
   }
 
-  _showSlider() {
+  _showSlider(size) {
     return Container(
       child: Expanded(
         child: new TinderSwapCard(
@@ -85,10 +86,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           totalNum: 5,
           swipeEdge: 2.0,
           allowVerticalMovement: false,
-          maxWidth: MediaQuery.of(context).size.width,
-          maxHeight: MediaQuery.of(context).size.height * 0.8,
-          minWidth: MediaQuery.of(context).size.width * 0.8,
-          minHeight: MediaQuery.of(context).size.height * 0.7,
+          maxWidth: size.width,
+          maxHeight: size.height * 0.8,
+          minWidth: size.width * 0.8,
+          minHeight: size.height * 0.7,
           cardBuilder: (context, index) => ProfileCard(index: index),
           cardController: controller = CardController(),
           swipeCompleteCallback: (CardSwipeOrientation orientation, int index) {
@@ -106,10 +107,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     );
   }
 
-  _showEnd() {
+  _showEnd(size) {
     return Container(
       width: double.infinity,
-      height: MediaQuery.of(context).size.height * 0.6,
+      height: size.height * 0.6,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
